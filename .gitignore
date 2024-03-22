@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+
+# SQLAlchemy
+*.sqlite
+
+# PostgreSQL
+*.sql
+
+# Virtual Environment
+venv
+venv/
+
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Dependency directories
+lib/
+libs/
+lib64/
+
+# Database
+*.db
+
+# Environment variables
+.env
