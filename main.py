@@ -1,29 +1,30 @@
-import asyncio
+import uvicorn
+from fastapi import FastAPI, APIRouter
 
-from fastapi import FastAPI
-from fastapi import Depends
-
-from app.core.config import settings
+from app.handlers import url_router
 
 app = FastAPI()
 
-from app.db.session import get_async_session
-from app.db.models import ShortUrlORM, Base
+main_app_router = APIRouter()
+main_app_router.include_router(url_router, prefix="/url", tags=["url"])
+
+app.include_router(main_app_router)
 
 
-async def get_db():
-    async with get_async_session() as session:
-        new_url = ShortUrlORM(full_url="https://www.perplexity.ai/search/python-JU9gGWCnRHu_umso2QX9GQ",
-                              short_url="asdo")
-        session.add(new_url)
-        await session.flush()
-        await session.commit()
+# async def get_db():
+#     async with get_async_session() as session:
+#         new_url = ShortUrlORM(
+#             full_url="https://www.perplexity.ai/search/python-JU9gGWCnRHdu_umso2QX9GQ",
+#             short_url="assdo",
+#         )
+#         session.add(new_url)
+#         await session.flush()
+#         await session.commit()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello world!"}
+@app.get("/ping")
+async def ping():
+    return {"ping": "pong"}
 
-
-print(settings.DATABASE_URL)
-asyncio.run(get_db())
+if __name__ == '__main__':
+    uvicorn.run(app, host="127.0.0.1", port=8001)
