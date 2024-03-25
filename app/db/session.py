@@ -10,7 +10,7 @@ from app.core.config import settings
 
 
 def new_async_engine(uri: URL) -> AsyncEngine:
-    return create_async_engine(uri, future=True, echo=True)
+    return create_async_engine(uri, future=True, echo=False)
 
 
 # create async engine for interaction with db
