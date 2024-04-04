@@ -30,3 +30,7 @@ lib64/
 
 # Environment variables
 .env
+
+# migrations
+/migrations
+/tests/migrations
