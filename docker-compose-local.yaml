@@ -15,6 +15,19 @@ services:
       - "5432:5432"
     networks:
       - custom
+  db-test:
+    container_name: "test_db"
+    image: postgres:15.6-alpine3.18
+    restart: always
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
 networks:
   custom:
     driver: bridge
