@@ -25,7 +25,14 @@ class Settings(BaseSettings):
             f"{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.TEST_DB_NAME}"
         )
 
-    model_config = SettingsConfigDict(env_file="D:\Development\Shorty\.env")
+    @property
+    def TEST_SYNC_DATABASE_URL(self):
+        return (
+            f"postgresql+psycopg2://{self.TEST_DB_USER}:{self.TEST_DB_PASSWORD}@"
+            f"{self.TEST_DB_HOST}:{self.TEST_DB_PORT}/{self.TEST_DB_NAME}"
+        )
+
+    model_config = SettingsConfigDict(env_file=".env")
 
 
 settings = Settings()
